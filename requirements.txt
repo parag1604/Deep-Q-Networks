@@ -1,4 +1,4 @@
 numpy
 torch
 matplotlib
-gymnasium[box2d]
+gymnasium[box2d]>=1.0

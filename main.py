@@ -84,14 +84,19 @@ def dqn(env, agent, n_episodes=1000, max_t=1000, eps_start=1.0,
     return scores
 
 
-def plot_scores(scores, title, save_dir='plots'):
+def plot_scores(scores, title, save_dir='plots', threshold=None):
     os.makedirs(save_dir, exist_ok=True)
     plt.figure()
-    plt.plot(scores, alpha=0.6)
-    if len(scores) > 100:
+    plt.plot(np.arange(1, len(scores) + 1), scores, alpha=0.6,
+             label="Episode return")
+    if len(scores) >= 100:
         ma = [np.mean(scores[i - 100:i]) for i in range(100, len(scores) + 1)]
-        plt.plot(np.arange(100, len(scores) + 1), ma)
-    plt.legend(["Episode return", "Moving average (100 episodes)"])
+        plt.plot(np.arange(100, len(scores) + 1), ma,
+                 label="Moving average (100 episodes)")
+    if threshold is not None:
+        plt.axhline(threshold, color="k", linestyle="--", linewidth=1,
+                    label=f"Solved threshold ({threshold:g})")
+    plt.legend()
     plt.xlabel("Episode")
     plt.ylabel("Return")
     plt.title(title)
@@ -133,7 +138,8 @@ def main():
 
     scores = dqn(env, agent, n_episodes=args.episodes, max_t=args.max_t,
                  target_score=env.spec.reward_threshold)
-    print('Saved', plot_scores(scores, f'dqn_{args.env}'))
+    print('Saved', plot_scores(scores, f'dqn_{args.env}',
+                               threshold=env.spec.reward_threshold))
     os.makedirs('models', exist_ok=True)
     torch.save(agent.q_net.state_dict(), f'models/dqn_{args.env}.pth')
 

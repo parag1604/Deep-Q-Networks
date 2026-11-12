@@ -37,6 +37,23 @@ python main.py --env LunarLander-v3
 python main.py --episodes 20           # quick run
 ```
 
-Training stops when the average return of the last 100 episodes exceeds the environment's threshold (195 for CartPole-v0, 200 for LunarLander); with the default seed, CartPole-v0 was solved after 900 episodes. The return curve is saved to `plots/dqn_<env>.png` and the network to `models/` (both git-ignored). Add `--render` to watch the greedy agent after training.
+Training stops when the average return of the last 100 episodes exceeds the environment's threshold (195 for CartPole-v0, 200 for LunarLander). The return curve (every episode's return, its 100-episode moving average and the threshold) is saved to `plots/dqn_<env>.png` and the network to `models/` (both git-ignored). Add `--render` to watch the greedy agent after training. The script prints "solved in N episodes" with N = (last episode - 100), the start of the winning 100-episode window.
+
+## Results
+
+Both runs use the default hyperparameters and seed (2022), on the CPU of an Apple-silicon Mac; re-running reproduces them exactly.
+
+| Environment | Episodes run | Average of the last 100 | Wall-clock time |
+|---|---|---|---|
+| CartPole-v0 | 891 | 195.25 | 15 s |
+| LunarLander-v3 | 609 | 200.26 | about 2 min |
+
+CartPole-v0: the return stays around 10 to 25 for about 750 episodes and then shoots up to the 200 cap within a few dozen. The defaults (a slow soft update, $\tau = 10^{-3}$; one gradient step every 4 environment steps; $\epsilon$ decaying by 0.995 per episode) were tuned for LunarLander. CartPole's early episodes last only 10 to 20 steps, so in the first few hundred episodes the network gets only a few gradient steps per episode and the target network barely moves.
+
+![DQN on CartPole-v0: episode return and 100-episode moving average](static/dqn_CartPole-v0.png "DQN on CartPole-v0")
+
+LunarLander-v3: a steady climb from about -200 to the 200 threshold.
+
+![DQN on LunarLander-v3: episode return and 100-episode moving average](static/dqn_LunarLander-v3.png "DQN on LunarLander-v3")
 
 A single-file version of the same algorithm, as the last step of a progression from dynamic programming through tabular Q-learning, is in the [RL-Basics](https://github.com/parag1604/RL-Basics) repository.
