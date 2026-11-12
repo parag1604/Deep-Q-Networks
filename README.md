@@ -6,7 +6,7 @@ A modular Deep Q-Network (DQN) with experience replay and a soft-updated target 
 
 ## Theory
 
-Lecture notes for this topic (TD learning, Q-learning and DQN) are coming soon on https://parag1604.github.io/notes. Until then, the background is in [Introduction to Reinforcement Learning](https://parag1604.github.io/notes/Reinforcement-Learning/Introduction-to-Reinforcement-Learning) (value functions and the Bellman optimality equation for $Q^*$).
+Please note that the theory of Q-learning is hosted on this [page](https://parag1604.github.io/notes/Reinforcement-Learning/Q-Learning-and-SARSA); a dedicated DQN lecture is coming soon on https://parag1604.github.io/notes
 
 ## Python Environment Setup
 
