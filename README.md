@@ -18,10 +18,6 @@ pip install -r requirements.txt
 
 `gymnasium[box2d]` is only needed for LunarLander (it needs `swig` to build; `brew install swig` on macOS). CartPole works with plain `gymnasium`.
 
-## Data
-
-No dataset is needed: the agent collects its own experience in [Gymnasium](https://gymnasium.farama.org/) environments.
-
 ## Running
 
 Read the files in this order; each one is a single building block:
