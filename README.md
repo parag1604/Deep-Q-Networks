@@ -6,7 +6,7 @@ A modular Deep Q-Network (DQN) with experience replay and a soft-updated target 
 
 ## Theory
 
-Please note that the theory of Q-learning is hosted on this [page](https://parag1604.github.io/notes/Reinforcement-Learning/Q-Learning-and-SARSA); a dedicated DQN lecture is coming soon on https://parag1604.github.io/notes
+Please note that the theory is hosted on this [page](https://parag1604.github.io/notes/Reinforcement-Learning/Q-Learning-and-SARSA#deep-q-networks) (Q-learning, and its section "Deep Q-networks": replay, target networks, why there is no convergence guarantee, and CNNs for Atari and Go)
 
 ## Python Environment Setup
 
